@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-//    [EAGLContext setCurrentContext:context];
+    [EAGLContext setCurrentContext:context];
     GLKView *view = (GLKView *)self.view;
     view.context = context;
     view.drawableColorFormat = GLKViewDrawableColorFormatRGBA8888;
@@ -39,8 +39,9 @@
 //    用来开启更新深度缓冲区，OpenGL在绘制的时候就会检查，当前像素前面是否有别的像素，如果别的像素挡着了它，那它就不会绘制，也就是说，OpenGL就只绘制最前面的一层；当我们需要绘制透明图片时，就需要关闭它。
     glEnable(GL_DEPTH_TEST);
     
+
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-//    前三顶点，后2纹理
+//    前三顶点(X,Y,Z),后2(U,V)与纹理进行映射
     GLfloat vertextData[]={
         0.5f,-0.5f,0.0f, 1.0f,0.0f,
         0.5f,0.5f,0.0f, 1.0f,1.0f,
@@ -68,16 +69,30 @@
 //    设置纹理坐标
     glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*5, (GLfloat *)NULL+3);
     
+    
     /***********************  加载纹理  ******************************/
+    
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);//纹素数量大于片元的数量，多个纹素对应一个片元
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);//纹素数量小片元的数量
+
+//    当U、V坐标的值小于0或大于1时，有两个选择，要么尽可能多地重复纹理以填满映射到几何图形的整个U、V区域，要么U、V超出S、T坐标系的范围时，取样纹理边缘。
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);//截取
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);//S方向重复纹理
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);//T方向重复纹理
+    
 //读取纹理
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"png"];
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"png"];
+//    如果不设置options，则绘制的图像是倒置的
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:@(1),GLKTextureLoaderOriginBottomLeft, nil];
-    GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:nil];
+//    GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:nil];
+    CGImageRef imageRef = [UIImage imageNamed:@"test"].CGImage;
+//    GLKTextureLoader会自动调用glTexParameteri()方法来为创建的纹理缓存设置OpenGL ES取样和循环模式
+    GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithCGImage:imageRef options:options error:NULL];
 //    着色器
     mEffect = [[GLKBaseEffect alloc] init];
     mEffect.texture2d0.enabled = GL_TRUE;
     mEffect.texture2d0.name = textureInfo.name;
-    
+    mEffect.texture2d0.target = textureInfo.target;
 }
 
 
