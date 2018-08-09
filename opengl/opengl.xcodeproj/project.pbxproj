@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		42447E102117F05500B5F2CE /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 42447E0F2117F05500B5F2CE /* test.png */; };
+		42447E142119392800B5F2CE /* aa.png in Resources */ = {isa = PBXBuildFile; fileRef = 42447E132119392800B5F2CE /* aa.png */; };
 		42DC994A2111439E008496FE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DC99492111439E008496FE /* AppDelegate.m */; };
 		42DC994D2111439E008496FE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DC994C2111439E008496FE /* ViewController.m */; };
 		42DC99502111439E008496FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42DC994E2111439E008496FE /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		42447E0F2117F05500B5F2CE /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
+		42447E132119392800B5F2CE /* aa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aa.png; sourceTree = "<group>"; };
 		42DC99452111439E008496FE /* opengl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = opengl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42DC99482111439E008496FE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		42DC99492111439E008496FE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 		42DC99472111439E008496FE /* opengl */ = {
 			isa = PBXGroup;
 			children = (
+				42447E132119392800B5F2CE /* aa.png */,
 				42447E0F2117F05500B5F2CE /* test.png */,
 				42DC99482111439E008496FE /* AppDelegate.h */,
 				42DC99492111439E008496FE /* AppDelegate.m */,
@@ -131,6 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42447E142119392800B5F2CE /* aa.png in Resources */,
 				42447E102117F05500B5F2CE /* test.png in Resources */,
 				42DC9955211143A8008496FE /* LaunchScreen.storyboard in Resources */,
 				42DC9952211143A8008496FE /* Assets.xcassets in Resources */,
