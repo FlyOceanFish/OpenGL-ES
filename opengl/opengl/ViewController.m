@@ -136,6 +136,10 @@
     mEffect.texture2d0.enabled = GL_TRUE;
     mEffect.texture2d0.name = textureInfo.name;
     mEffect.texture2d0.target = textureInfo.target;
+    //以下两句代码可以使图片不变形
+    const GLfloat aspectRatio = (GLfloat)view.drawableWidth/(GLfloat)view.drawableHeight;
+    mEffect.transform.projectionMatrix = GLKMatrix4MakeScale(1, aspectRatio, 1);
+
     /** 多纹理 **
     mEffect.texture2d1.enabled = GL_TRUE;
     mEffect.texture2d1.name = textureInfo2.name;
